@@ -3,64 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Project Lab | Science & Electronics Guide</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Science & Electronics Project Repository</title>
+    <!-- Tailwind CSS for high-quality, modern styling -->
+    <script src="https://tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <div class="header-container">
-            <h1>🔬 Student Project Lab ⚡</h1>
-            <p>Your ultimate guide to building awesome Science & Electronics projects from scratch!</p>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen relative">
+
+    <!-- Navbar Header -->
+    <header class="bg-slate-900 text-white shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <h1 class="text-2xl font-black tracking-tight">SciElectro<span class="text-indigo-400">Hub</span></h1>
+            <p class="text-sm font-medium text-slate-400">50+ Open-Source Engineering Guides</p>
         </div>
     </header>
 
-    <main class="container">
-        <!-- Step-by-Step Guide Section -->
-        <section class="guide-section">
-            <h2>🛠️ How to Build Any Project (The 4-Step Formula)</h2>
-            <div class="steps-grid">
-                <div class="step-card">
-                    <div class="step-num">1</div>
-                    <h3>Brainstorm & Plan</h3>
-                    <p>Identify a problem you want to solve. Sketch out your idea on paper and list the components or materials you will need before starting.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">2</div>
-                    <h3>Gather Materials</h3>
-                    <p>Collect your items. For electronics, this might mean a breadboard, jumper wires, and sensors. For science, basic household materials often work best.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">3</div>
-                    <h3>Build & Prototype</h3>
-                    <p>Start assembling your project step-by-step. Keep your workspace clean. If something doesn't work right away, don't worry—debugging is part of the fun!</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-num">4</div>
-                    <h3>Test & Document</h3>
-                    <p>Test your project multiple times. Take notes on what happened, shoot a short video demonstration, and write down how it works to show your teachers.</p>
-                </div>
+    <!-- Main Workspace -->
+    <main class="max-w-6xl mx-auto px-4 py-10">
+        
+        <!-- Search and Filter Section -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-10 flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div class="w-full md:w-1/2">
+                <label for="search" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Search Guides</label>
+                <input type="text" id="search" placeholder="Type a component or project title (e.g., Arduino)..." 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none">
             </div>
-        </section>
+            <div class="w-full md:w-1/3">
+                <label for="categoryFilter" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Filter by Stream</label>
+                <select id="categoryFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    <option value="all">All Fields</option>
+                    <option value="Electronics Project">Electronics Project</option>
+                    <option value="Science Projects">Science Projects</option>
+                </select>
+            </div>
+        </div>
 
-        <!-- Project Ideas Section -->
-        <section class="projects-section">
-            <h2>💡 Beginner-Friendly Starter Ideas</h2>
-            
-            <div class="category-toggle">
-                <button id="btn-electronics" class="active-btn" onclick="filterProjects('electronics')">Electronics Projects</button>
-                <button id="btn-science" onclick="filterProjects('science')">Science Projects</button>
-            </div>
-
-            <div id="projects-container" class="projects-grid">
-                <!-- Projects will be injected by JavaScript -->
-            </div>
-        </section>
+        <!-- Project Grid Container -->
+        <div id="projectsGrid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <p class="text-center text-gray-500 col-span-full py-10">Assembling project blueprint library...</p>
+        </div>
     </main>
 
-    <footer>
-        <p>Created for curious students • Built with HTML, CSS, and JS</p>
-    </footer>
+    <!-- Interactive Popup Modal (Hidden by Default) -->
+    <div id="projectModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" onclick="closeModal(event)">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100 flex flex-col" onclick="event.stopPropagation()">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-gray-100 flex justify-between items-start">
+                <div>
+                    <span id="modalCategory" class="text-xs font-bold uppercase tracking-wider text-indigo-600 block mb-1"></span>
+                    <h2 id="modalTitle" class="text-2xl font-black text-gray-900"></h2>
+                </div>
+                <button onclick="closeModal(null)" class="text-gray-400 hover:text-gray-600 text-2xl font-bold p-1">&times;</button>
+            </div>
+            <!-- Modal Body -->
+            <div class="p-6 space-y-6">
+                <div>
+                    <span class="text-xs font-bold text-slate-400 uppercase block tracking-wide mb-2">Bill of Materials</span>
+                    <div id="modalComponents" class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm text-slate-700 italic"></div>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-slate-400 uppercase block tracking-wide mb-2">Full Assembly Step-by-Step Guide</span>
+                    <p id="modalSteps" class="text-gray-600 text-sm whitespace-pre-line leading-relaxed bg-indigo-50/30 p-4 rounded-xl border border-indigo-100/50"></p>
+                </div>
+            </div>
+            <!-- Modal Footer -->
+            <div class="p-4 bg-gray-50 border-t border-gray-100 text-right">
+                <button onclick="closeModal(null)" class="px-5 py-2 bg-slate-900 text-white font-medium text-sm rounded-lg hover:bg-slate-800 transition">Close Guide</button>
+            </div>
+        </div>
+    </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <!-- Project Logic Script -->
+    <script>
+        let allProjects = [];
+
+        async function loadProjects() {
+            try {
+                const response = await fetch('projects.json');
+                allProjects = await response.json();
+                renderCards(allProjects);
+            } catch (error) {
+                console.error("Error connecting to data file:", error);
+                document.getElementById('projectsGrid').innerHTML = `
+                    <p class="text-center text-red-500 font-bold col-span-full">Failed to load projects. Ensure projects.json is uploaded alongside this file.</p>
+                `;
+            }
+        }
+
+        function renderCards(projectsList) {
+            const grid = document.getElementById('projectsGrid');
+            if (projectsList.length === 0) {
+                grid.innerHTML = `<p class="text-center text-gray-500 col-span-full py-10">No matching projects found.</p>`;
+                return;
+            }
+
+            grid.innerHTML = projectsList.map(project => {
+                // Ensure display category strings look uniform on layout grid
+                let displayCat = project.category;
+                if(displayCat !== "Electronics Project" && displayCat !== "Science Projects") {
+                    displayCat = displayCat.includes("Electronics") || displayCat.includes("Embedded") || displayCat.includes("Automation") ? "Electronics Project" : "Science Projects";
+                }
+
+                return `
+                <div onclick="openModal(${project.id})" class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between cursor-pointer hover:border-indigo-300 group">
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">${displayCat}</span>
+                            <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full ${
+                                project.difficulty === 'Easy' ? 'bg-green-100 text-green-800' :
+                                project.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
+                            }">${project.difficulty}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">${project.title}</h3>
+                        <p class="text-gray-500 text-xs line-clamp-2">${project.components}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 text-left">
+                        <span class="text-xs font-bold text-indigo-600 inline-flex items-center gap-1 group-hover:underline">
+                            View Full Guide &rarr;
+                        </span>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function openModal(id) {
+            const project = allProjects.find(p => p.id === id);
+            if (!project) return;
+
+            let displayCat = project.category;
+            if(displayCat !== "Electronics Project" && displayCat !== "Science Projects") {
+                displayCat = displayCat.includes("Electronics") || displayCat.includes("Embedded") || displayCat.includes("Automation") ? "Electronics Project" : "Science Projects";
+            }
+
+            document.getElementById('modalCategory').innerText = displayCat;
+            document.getElementById('modalTitle').innerText = project.title;
+            document.getElementById('modalComponents').innerText = project.components;
+            document.getElementById('modalSteps').innerText = project.steps;
+
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(event) {
+            const modal = document.getElementById('projectModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; 
+        }
+
+        function filterProjects() {
+            const searchQuery = document.getElementById('search').value.toLowerCase();
+            const categoryQuery = document.getElementById('categoryFilter').value;
+
+            const filtered = allProjects.filter(project => {
+                const matchesSearch = project.title.toLowerCase().includes(searchQuery) || 
+                                      project.components.toLowerCase().includes(searchQuery);
+                
+                // Map the dynamic datasets to match the exact select option strings
+                let mappedCategory = project.category;
+                if(mappedCategory !== "Electronics Project" && mappedCategory !== "Science Projects") {
+                    mappedCategory = mappedCategory.includes("Electronics") || mappedCategory.includes("Embedded") || mappedCategory.includes("Automation") ? "Electronics Project" : "Science Projects";
+                }
+
+                const matchesCategory = categoryQuery === 'all' || mappedCategory === categoryQuery;
+                return matchesSearch && matchesCategory;
+            });
+
+            renderCards(filtered);
+        }
+
+        document.getElementById('search').addEventListener('input', filterProjects);
+
