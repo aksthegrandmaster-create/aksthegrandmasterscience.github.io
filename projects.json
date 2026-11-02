@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "title": "Smart Irrigation System",
+    "category": "Electronics & IoT",
+    "difficulty": "Medium",
+    "components": "Arduino Uno, Soil Moisture Sensor, 5V Relay, Water Pump",
+    "steps": "1. Connect Soil Moisture Sensor VCC to Arduino 5V, GND to GND, and AO to Pin A0.\n2. Wire the 5V Relay module to digital pin 7.\n3. Connect the water pump through the relay contacts to a power source.\n4. Upload code to read sensor data: if below threshold, turn relay ON."
+  },
+  {
+    "id": 2,
+    "title": "DIY Solar Phone Charger",
+    "category": "Renewable Energy",
+    "difficulty": "Easy",
+    "components": "6V Solar Panel, 5V DC-DC Buck Converter, USB Port, Wires",
+    "steps": "1. Identify positive (+) and negative (-) terminals on the solar panel.\n2. Solder wires from panel terminals to the Input side of the 5V voltage regulator.\n3. Connect a USB female port to the output side of the regulator.\n4. Place under sunlight and plug in your phone charging cable."
+  },
+  {
+    "id": 3,
+    "title": "Home Automation via Bluetooth",
+    "category": "Robotics & Automation",
+    "difficulty": "Hard",
+    "components": "Arduino, HC-05 Bluetooth Module, 4-Channel Relay, Smartphone App",
+    "steps": "1. Connect HC-05 TX to Arduino RX (Pin 0) and RX to TX (Pin 1) with a voltage divider.\n2. Wire appliances through the 4 channels of the relay board.\n3. Connect relay signal pins to digital pins 2, 3, 4, and 5.\n4. Code Arduino to switch relay on serial character inputs."
+  },
+  {
+    "id": 4,
+    "title": "Automatic Street Light Controller",
+    "category": "Embedded Systems",
+    "difficulty": "Medium",
+    "components": "LDR (Light Dependent Resistor), 555 Timer IC, LED, 10k Resistor, 9V Battery",
+    "steps": "1. Connect the LDR and a 10k resistor as a potential divider circuit.\n2. Feed the midpoint voltage to the trigger pin of a 555 Timer or operational amplifier.\n3. Connect an LED or a relay to the output pin to activate the light.\n4. Calibrate sensitivity by adjusting the variable resistor layout."
+  },
+  {
+    "id": 5,
+    "title": "Obstacle Avoiding Robot",
+    "category": "Electronics & IoT",
+    "difficulty": "Hard",
+    "components": "Arduino Uno, L298N Motor Driver, DC Gear Motors, Chassis, Battery Pack",
+    "steps": "1. Mount the DC gear motors and wheels to the structural robot chassis frame.\n2. Connect motor leads directly to the output channels of the L298N driver.\n3. Route control lines from Arduino digital output channels to driver inputs.\n4. Program the logic loops to orchestrate directional movement matrixes."
+  },
+  {
+    "id": 6,
+    "title": "Digital Thermometer using LM35",
+    "category": "Renewable Energy",
+    "difficulty": "Easy",
+    "components": "Arduino Uno, Jumper Wires, Breadboard, 5V Power Supply",
+    "steps": "1. Assemble components safely on a standard breadboard circuit.\n2. Interface input sensory elements with respective Arduino GPIO pins.\n3. Upload custom embedded C firmware utilizing Arduino IDE configuration.\n4. Power up system and verify functional parameters align with design goals."
+  },
+  {
+    "id": 7,
+    "title": "LPG Gas Leakage Detector",
+    "category": "Robotics & Automation",
+    "difficulty": "Medium",
+    "components": "Gas/Smoke Sensor Module, Active Buzzer, Arduino Uno, Red LED",
+    "steps": "1. Connect the VCC and GND pins of the sensory module to the main power lines.\n2. Tie the analog or digital output pin directly to an Arduino data input channel.\n3. Attach an active buzzer and warning LED to designated digital outputs.\n4. Set threshold monitoring bounds inside the code script execution loop."
+  },
+  {
+    "id": 8,
+    "title": "RFID Based Attendance System",
+    "category": "Sensor Technologies",
+    "difficulty": "Hard",
+    "components": "Arduino Uno, Jumper Wires, Breadboard, 5V Power Supply",
+    "steps": "1. Assemble components safely on a standard breadboard circuit.\n2. Interface input sensory elements with respective Arduino GPIO pins.\n3. Upload custom embedded C firmware utilizing Arduino IDE configuration.\n4. Power up system and verify functional parameters align with design goals."
+  },
+  {
+    "id": 9,
+    "title": "Ultrasonic Distance Meter",
+    "category": "Embedded Systems",
+    "difficulty": "Easy",
+    "components": "Arduino Uno, Jumper Wires, Breadboard, 5V Power Supply",
+    "steps": "1. Assemble components safely on a standard breadboard circuit.\n2. Interface input sensory elements with respective Arduino GPIO pins.\n3. Upload custom embedded C firmware utilizing Arduino IDE configuration.\n4. Power up system and verify functional parameters align with design goals."
+  },
+  {
+    "id": 10,
+    "title": "Voice Controlled House Appliances",
+    "category": "Electronics & IoT",
+    "difficulty": "Medium",
+    "components": "Arduino Uno, Jumper Wires, Breadboard, 5V Power Supply",
+    "steps": "1. Assemble components safely on a standard breadboard circuit.\n2. Interface input sensory elements with respective Arduino GPIO pins.\n3. Upload custom embedded C firmware utilizing Arduino IDE configuration.\n4. Power up system and verify functional parameters align with design goals."
+  },
+  {
+    "id": 11,
+    "title": "Fingerprint Door Lock System",
+    "category": "Renewable Energy",
+    "difficulty": "Hard",
+    "components": "Arduino Uno, Jumper Wires, Breadboard, 5V Power Supply",
+    "steps": "1. Assemble components safely on a standard breadboard circuit.\n2. Interface input sensory elements with respective Arduino GPIO pins.\n3. Upload custom embedded C firmware utilizing Arduino IDE configuration.\n4. Power up system and verify functional parameters align with design goals."
+  },
+  {
+    "id": 12,
+    "title": "Rain Detector Alarm",
+    "category": "Robotics & Automation",
+    "difficulty": "Easy",
+    "components": "Gas/Smoke Sensor Module, Active Buzzer, Arduino Uno, Red LED",
+    "steps": "1. Connect the VCC and GND pins of the sensory module to the main power lines.\n2. Tie the analog or digital output pin directly to an Arduino data input channel.\n3. Attach an active buzzer and warning LED to designated digital outputs.\n4. Set threshold monitoring bounds inside the code script execution loop."
+  },
+  {
+    "id": 13,
+    "title": "Line Follower Robot",
+    "category": "Sensor Technologies",
+    "difficulty": "Medium",
+    "components": "Arduino Uno, L298N Motor Driver, DC Gear Motors, Chassis, Battery Pack",
+    "steps": "1. Mount the DC gear motors and wheels to the structural robot chassis frame.\n2. Connect motor leads directly to the output channels of the L298N driver.\n3. Route control lines from Arduino digital output channels to driver inputs.\n4. Program the logic loops to orchestrate directional movement matrixes."
+  },
+  {
+    "id": 14,
+    "title": "Water Level Indicator",
+    "category": "Embedded Systems",
+    "difficulty": "Hard",
+    "components": "Arduino Uno, Jumper Wires, Breadboard, 5V Power Supply",
+    "steps": "1. Assemble components safely on a standard breadboard circuit.\n2. Interface input sensory elements with respective Arduino GPIO pins.\n3. Upload custom embedded C firmware utilizing Arduino IDE configuration.\n4. Power up system and verify functional parameters align with design goals."
+  },
+  {
+    "id": 15,
+    "title": "Password Protected Security System",
+    "category": "Electronics & IoT",
+    "difficulty": "Easy",
+    "components": "Arduino Uno, Jumper Wires, Breadboard, 5V Power Supply",
+    "steps": "1. Assemble components safely on a standard breadboard circuit.\n2. Interface input sensory elements with respective Arduino GPIO pins.\n3. Upload custom embedded C firmware utilizing Arduino IDE configuration.\n4. Power up system and verify functional parameters align with design goals."
+  },
+  {
+    "id": 16,
+    "title": "Smart Dustbin with Arduino",
+    "category": "Renewable Energy",
+    "difficulty": "Medium",
+    "components": "Arduino Uno, Jumper Wires, Breadboard, 5V Power Supply",
+    "steps": "1. Assemble components safely on a standard breadboard circuit.\n2. Interface input sensory elements with respective Arduino GPIO pins.\n3. Upload custom embedded C firmware utilizing Arduino IDE configuration.\n4. Power up system and verify functional parameters align with design goals."
+  },
+  {
+    "id": 17,
+    "title": "Air Quality Monitor (MQ-135)",
+    "category": "Robotics & Automation",
+    "difficulty": "Hard",
+    "components": "Arduino Uno, Jumper Wires, Breadboard, 5V Power Supply",
+    "steps": "1. Assemble components safely on a standard breadboard circuit.\n2. Interface input sensory elements with respective Arduino GPIO pins.\n3. Upload custom embedded C firmware utilizing Arduino IDE configuration.\n4. Power up system and verify functional parameters align with design goals."
+  },
+  {
+    "id": 18,
+    "title": "Solar Tracking System",
+    "category": "Sensor Technologies",
+    "difficulty": "Easy",
+    "components": "Mini Solar Panel, Rechargeable Li-Ion Battery, TP4056 Charging Module",
+    "steps": "1. Wire output positive and negative leads of solar panel to TP4056 inputs.\n2. Attach a protected Lithium-Ion cell array directly to battery terminals.\n3. Route step-up regulator pipelines to establish clean system voltage.\n4. Position deployment system under sunlight exposure to index baseline charge rates."
+  },
+  {
+    "id": 19,
+    "title": "Heart Rate Monitor using Pulse Sensor",
+    "category": "Embedded Systems",
+    "difficulty": "Medium",
+    "components": "Gas/Smoke Sensor Module, Active Buzzer, Arduino Uno, Red LED",
+    "steps": "1. Connect the VCC and GND pins of the sensory module to the main power lines.\n2. Tie the analog or digital output pin directly to an Arduino data input channel.\n3. Attach an active buzzer and warning LED to designated digital outputs.\n4. Set threshold monitoring bounds inside the code script execution loop."
+  },
+  {
+    "id": 20,
