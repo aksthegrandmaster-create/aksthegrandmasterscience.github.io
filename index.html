@@ -3,81 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Science & Electronics Project Repository</title>
-    <script src="https://tailwindcss.com"></script>
-    <style>
-        /* Smooth scrolling physics */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+    <title>Student Project Lab | Science & Electronics Guide</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans min-h-screen">
-
-    <!-- Navbar Header -->
-    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-40">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-black tracking-tight">SciElectro<span class="text-indigo-400">Hub</span></h1>
-            <div class="flex gap-4">
-                <button onclick="scrollToSection('electronics-container')" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-3 rounded-lg transition shadow">
-                    Electronics Projects
-                </button>
-                <button onclick="scrollToSection('science-container')" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-3 rounded-lg transition shadow">
-                    Science Projects
-                </button>
-            </div>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>🔬 Student Project Lab ⚡</h1>
+            <p>Your ultimate guide to building awesome Science & Electronics projects from scratch!</p>
         </div>
     </header>
 
-    <!-- Main Workspace -->
-    <main class="max-w-4xl mx-auto px-4 py-8">
-        
-        <!-- Welcome Screen -->
-        <div class="text-center py-6 mb-8 border-b border-gray-200">
-            <h2 class="text-3xl font-extrabold text-slate-800 mb-2">50 Open-Source Engineering Guides</h2>
-            <p class="text-sm text-gray-500 max-w-md mx-auto">Scroll through full component requirements and schematics listed below, or jump directly using the buttons above.</p>
-        </div>
+    <main class="container">
+        <!-- Step-by-Step Guide Section -->
+        <section class="guide-section">
+            <h2>🛠️ How to Build Any Project (The 4-Step Formula)</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Brainstorm & Plan</h3>
+                    <p>Identify a problem you want to solve. Sketch out your idea on paper and list the components or materials you will need before starting.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Gather Materials</h3>
+                    <p>Collect your items. For electronics, this might mean a breadboard, jumper wires, and sensors. For science, basic household materials often work best.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Build & Prototype</h3>
+                    <p>Start assembling your project step-by-step. Keep your workspace clean. If something doesn't work right away, don't worry—debugging is part of the fun!</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>Test & Document</h3>
+                    <p>Test your project multiple times. Take notes on what happened, shoot a short video demonstration, and write down how it works to show your teachers.</p>
+                </div>
+            </div>
+        </section>
 
-        <!-- ELECTRONICS SECTION -->
-        <div id="electronics-container" class="scroll-mt-20 mb-16">
-            <div class="flex items-center gap-3 border-b-2 border-indigo-500 pb-2 mb-6">
-                <span class="text-2xl">⚡</span>
-                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Electronics & Embedded System Projects</h2>
+        <!-- Project Ideas Section -->
+        <section class="projects-section">
+            <h2>💡 Beginner-Friendly Starter Ideas</h2>
+            
+            <div class="category-toggle">
+                <button id="btn-electronics" class="active-btn" onclick="filterProjects('electronics')">Electronics Projects</button>
+                <button id="btn-science" onclick="filterProjects('science')">Science Projects</button>
             </div>
-            <div id="electronicsList" class="space-y-6">
-                <!-- Injected via JavaScript -->
-            </div>
-        </div>
 
-        <!-- SCIENCE SECTION -->
-        <div id="science-container" class="scroll-mt-20 mb-16">
-            <div class="flex items-center gap-3 border-b-2 border-emerald-500 pb-2 mb-6">
-                <span class="text-2xl">🔬</span>
-                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Science & Experimental Projects</h2>
+            <div id="projects-container" class="projects-grid">
+                <!-- Projects will be injected by JavaScript -->
             </div>
-            <div id="scienceList" class="space-y-6">
-                <!-- Injected via JavaScript -->
-            </div>
-        </div>
+        </section>
     </main>
 
-    <!-- Complete Self-Contained Database & Logic -->
-    <script>
-        const allProjects = [
-          {"id": 1, "title": "Smart Irrigation System", "category": "Electronics Project", "difficulty": "Medium", "components": "Arduino Uno, Soil Moisture Sensor, 5V Relay, Water Pump", "steps": "1. Connect Soil Moisture Sensor VCC to Arduino 5V, GND to GND, and AO to Pin A0.\n2. Wire the 5V Relay module to digital pin 7.\n3. Connect the water pump through the relay contacts to a power source.\n4. Upload code to read sensor data: if below threshold, turn relay ON."},
-          {"id": 2, "title": "DIY Solar Phone Charger", "category": "Science Projects", "difficulty": "Easy", "components": "6V Solar Panel, 5V DC-DC Buck Converter, USB Port, Wires", "steps": "1. Identify positive (+) and negative (-) terminals on the solar panel.\n2. Solder wires from panel terminals to the Input side of the 5V voltage regulator.\n3. Connect a USB female port to the output side of the regulator.\n4. Place under sunlight and plug in your phone charging cable."},
-          {"id": 3, "title": "Home Automation via Bluetooth", "category": "Electronics Project", "difficulty": "Hard", "components": "Arduino, HC-05 Bluetooth Module, 4-Channel Relay, Smartphone App", "steps": "1. Connect HC-05 TX to Arduino RX (Pin 0) and RX to TX (Pin 1) with a voltage divider.\n2. Wire appliances through the 4 channels of the relay board.\n3. Connect relay signal pins to digital pins 2, 3, 4, and 5.\n4. Code Arduino to switch relay on serial character inputs."},
-          {"id": 4, "title": "Automatic Street Light Controller", "category": "Electronics Project", "difficulty": "Medium", "components": "LDR (Light Dependent Resistor), 555 Timer IC, LED, 10k Resistor, 9V Battery", "steps": "1. Connect the LDR and a 10k resistor as a potential divider circuit.\n2. Feed the midpoint voltage to the trigger pin of a 555 Timer.\n3. Connect an LED or a relay to the output pin to activate the light.\n4. Calibrate sensitivity by adjusting the variable resistor layout."},
-          {"id": 5, "title": "Obstacle Avoiding Robot", "category": "Electronics Project", "difficulty": "Hard", "components": "Arduino Uno, L298N Motor Driver, DC Gear Motors, Chassis, Battery Pack", "steps": "1. Mount the DC gear motors and wheels to the structural robot chassis frame.\n2. Connect motor leads directly to the output channels of the L298N driver.\n3. Route control lines from Arduino digital output channels to driver inputs.\n4. Program the logic loops to orchestrate directional movement matrixes."},
-          {"id": 6, "title": "Digital Thermometer using LM35", "category": "Science Projects", "difficulty": "Easy", "components": "Arduino Uno, LM35 Temp Sensor, 16x2 LCD Display Screen, Wires", "steps": "1. Connect LM35 pin 1 to 5V, pin 3 to GND, and pin 2 to Arduino Analog pin A0.\n2. Wire LCD Display pins data lines to Arduino digital outputs 2, 3, 4, and 5.\n3. Write basic formula: Celsius = (AnalogRead * 0.488).\n4. Print output readings directly on the LCD screen module interface."},
-          {"id": 7, "title": "LPG Gas Leakage Detector", "category": "Electronics Project", "difficulty": "Medium", "components": "MQ-2 Gas Sensor Module, Active Buzzer, Arduino Uno, Red LED", "steps": "1. Connect the VCC and GND pins of the sensory module to the main power lines.\n2. Tie the digital output pin directly to an Arduino data input channel.\n3. Attach an active buzzer and warning LED to designated digital outputs.\n4. Set threshold monitoring bounds inside the code script execution loop."},
-          {"id": 8, "title": "RFID Based Attendance System", "category": "Electronics Project", "difficulty": "Hard", "components": "Arduino Uno, RC522 RFID Reader Module, RFID Tags, I2C LCD Display", "steps": "1. Wire RC522 SPI pins (MOSI, MISO, SCK) to Arduino pins 11, 12, and 13.\n2. Connect reader SDA to pin 10 and RST to pin 9.\n3. Scan unique card UID identifier codes into internal loop database metrics.\n4. Trigger custom validation alerts upon detecting authorized card keys."},
-          {"id": 9, "title": "Ultrasonic Distance Meter", "category": "Science Projects", "difficulty": "Easy", "components": "Arduino Uno, HC-SR04 Ultrasonic Sensor, Breadboard, Jumper Wires", "steps": "1. Connect HC-SR04 VCC to 5V, GND to GND, Trig to pin 9, and Echo to pin 10.\n2. Write script to pulse the trigger line high for 10 microseconds.\n3. Measure duration return feedback window length on Echo line input.\n4. Compute conversion matrix: Distance = (Duration * 0.0343) / 2."},
-          {"id": 10, "title": "Voice Controlled House Appliances", "category": "Electronics Project", "difficulty": "Medium", "components": "Arduino Uno, HC-05 Bluetooth, Relay Module, AMR Voice App", "steps": "1. Connect Bluetooth serial communication data pipes to target micro-controller.\n2. Interface smartphone layout terminal using a custom voice-to-text android application.\n3. Map spoken control sequences directly to specific physical high-voltage relays.\n4. Execute commands locally to switch linked lighting circuits on demand safely."},
-          {"id": 11, "title": "Fingerprint Door Lock System", "category": "Electronics Project", "difficulty": "Hard", "components": "Arduino, AS608 Fingerprint Sensor, Solenoid Door Lock, 12V Relay", "steps": "1. Connect AS608 serial transmission lines to designated software serial pins.\n2. Enroll master fingerprint scan profiles into internal flash storage arrays.\n3. Link 12V external primary driver loop through logic output switching relays.\n4. Fire output lines to disengage magnetic solenoid lock plates upon access match."},
-          {"id": 12, "title": "Rain Detector Alarm", "category": "Science Projects", "difficulty": "Easy", "components": "Raindrops Sensor Board, LM393 Comparator, Active Buzzer, 9V Battery", "steps": "1. Connect sensory hardware paths to inputs. Trigger audio output alerts immediately when rainwater hits standard detection tracks."},
-          {"id": 13, "title": "Line Follower Robot", "category": "Electronics Project", "difficulty": "Medium", "components": "Robot Chassis, Dual IR Sensor Modules, L298N Motor Driver, DC Motors", "steps": "1. Mount IR sensors onto structural undercarriage. Track path bounds dynamically to balance motor drive output matrices."},
-          {"id": 14, "title": "Water Level Indicator", "category": "Science Projects", "difficulty": "Easy", "components": "BC547 Transistors, Resistors, Multi-colored LEDs, Overhead Tank Probes", "steps": "1. Build sequential transmissive base wiring pipelines. Leverage water's inherent conductivity profile to complete circuit loops."},
-          {"id": 15, "title": "Password Protected Security System", "category": "Electronics Project", "difficulty": "Medium", "components": "Arduino Uno, 4x4 Matrix Keypad, 16x2 LCD Display, Servo Motor", "steps": "1. Map keypad line vectors to digital processing pins. Actuate standard servo lock arms upon matching code validation keys."},
+    <footer>
+        <p>Created for curious students • Built with HTML, CSS, and JS</p>
+    </footer>
 
-
+    <script src="script.js"></script>
+</body>
+</html>
