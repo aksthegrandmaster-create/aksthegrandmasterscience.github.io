@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Project Lab | Science & Electronics Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>🔬 Student Project Lab ⚡</h1>
+            <p>Your ultimate guide to building awesome Science & Electronics projects from scratch!</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Step-by-Step Guide Section -->
+        <section class="guide-section">
+            <h2>🛠️ How to Build Any Project (The 4-Step Formula)</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Brainstorm & Plan</h3>
+                    <p>Identify a problem you want to solve. Sketch out your idea on paper and list the components or materials you will need before starting.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Gather Materials</h3>
+                    <p>Collect your items. For electronics, this might mean a breadboard, jumper wires, and sensors. For science, basic household materials often work best.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Build & Prototype</h3>
+                    <p>Start assembling your project step-by-step. Keep your workspace clean. If something doesn't work right away, don't worry—debugging is part of the fun!</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>Test & Document</h3>
+                    <p>Test your project multiple times. Take notes on what happened, shoot a short video demonstration, and write down how it works to show your teachers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Ideas Section -->
+        <section class="projects-section">
+            <h2>💡 Beginner-Friendly Starter Ideas</h2>
+            
+            <div class="category-toggle">
+                <button id="btn-electronics" class="active-btn" onclick="filterProjects('electronics')">Electronics Projects</button>
+                <button id="btn-science" onclick="filterProjects('science')">Science Projects</button>
+            </div>
+
+            <div id="projects-container" class="projects-grid">
+                <!-- Projects will be injected by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created for curious students • Built with HTML, CSS, and JS</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
