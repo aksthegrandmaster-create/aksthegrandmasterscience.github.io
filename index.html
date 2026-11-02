@@ -4,172 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Science & Electronics Project Repository</title>
-    <!-- Tailwind CSS for high-quality, modern styling -->
     <script src="https://tailwindcss.com"></script>
+    <style>
+        /* Smooth scrolling physics */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans min-h-screen relative">
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen">
 
     <!-- Navbar Header -->
-    <header class="bg-slate-900 text-white shadow-md">
-        <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <h1 class="text-2xl font-black tracking-tight">SciElectro<span class="text-indigo-400">Hub</span></h1>
-            <p class="text-sm font-medium text-slate-400">50+ Open-Source Engineering Guides</p>
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-black tracking-tight">SciElectro<span class="text-indigo-400">Hub</span></h1>
+            <div class="flex gap-4">
+                <button onclick="scrollToSection('electronics-container')" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-3 rounded-lg transition shadow">
+                    Electronics Projects
+                </button>
+                <button onclick="scrollToSection('science-container')" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-3 rounded-lg transition shadow">
+                    Science Projects
+                </button>
+            </div>
         </div>
     </header>
 
     <!-- Main Workspace -->
-    <main class="max-w-6xl mx-auto px-4 py-10">
+    <main class="max-w-4xl mx-auto px-4 py-8">
         
-        <!-- Search and Filter Section -->
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-10 flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div class="w-full md:w-1/2">
-                <label for="search" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Search Guides</label>
-                <input type="text" id="search" placeholder="Type a component or project title (e.g., Arduino)..." 
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        <!-- Welcome Screen -->
+        <div class="text-center py-6 mb-8 border-b border-gray-200">
+            <h2 class="text-3xl font-extrabold text-slate-800 mb-2">50 Open-Source Engineering Guides</h2>
+            <p class="text-sm text-gray-500 max-w-md mx-auto">Scroll through full component requirements and schematics listed below, or jump directly using the buttons above.</p>
+        </div>
+
+        <!-- ELECTRONICS SECTION -->
+        <div id="electronics-container" class="scroll-mt-20 mb-16">
+            <div class="flex items-center gap-3 border-b-2 border-indigo-500 pb-2 mb-6">
+                <span class="text-2xl">⚡</span>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Electronics & Embedded System Projects</h2>
             </div>
-            <div class="w-full md:w-1/3">
-                <label for="categoryFilter" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Filter by Stream</label>
-                <select id="categoryFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-                    <option value="all">All Fields</option>
-                    <option value="Electronics Project">Electronics Project</option>
-                    <option value="Science Projects">Science Projects</option>
-                </select>
+            <div id="electronicsList" class="space-y-6">
+                <!-- Injected via JavaScript -->
             </div>
         </div>
 
-        <!-- Project Grid Container -->
-        <div id="projectsGrid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <p class="text-center text-gray-500 col-span-full py-10">Assembling project blueprint library...</p>
+        <!-- SCIENCE SECTION -->
+        <div id="science-container" class="scroll-mt-20 mb-16">
+            <div class="flex items-center gap-3 border-b-2 border-emerald-500 pb-2 mb-6">
+                <span class="text-2xl">🔬</span>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Science & Experimental Projects</h2>
+            </div>
+            <div id="scienceList" class="space-y-6">
+                <!-- Injected via JavaScript -->
+            </div>
         </div>
     </main>
 
-    <!-- Interactive Popup Modal (Hidden by Default) -->
-    <div id="projectModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" onclick="closeModal(event)">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100 flex flex-col" onclick="event.stopPropagation()">
-            <!-- Modal Header -->
-            <div class="p-6 border-b border-gray-100 flex justify-between items-start">
-                <div>
-                    <span id="modalCategory" class="text-xs font-bold uppercase tracking-wider text-indigo-600 block mb-1"></span>
-                    <h2 id="modalTitle" class="text-2xl font-black text-gray-900"></h2>
-                </div>
-                <button onclick="closeModal(null)" class="text-gray-400 hover:text-gray-600 text-2xl font-bold p-1">&times;</button>
-            </div>
-            <!-- Modal Body -->
-            <div class="p-6 space-y-6">
-                <div>
-                    <span class="text-xs font-bold text-slate-400 uppercase block tracking-wide mb-2">Bill of Materials</span>
-                    <div id="modalComponents" class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-sm text-slate-700 italic"></div>
-                </div>
-                <div>
-                    <span class="text-xs font-bold text-slate-400 uppercase block tracking-wide mb-2">Full Assembly Step-by-Step Guide</span>
-                    <p id="modalSteps" class="text-gray-600 text-sm whitespace-pre-line leading-relaxed bg-indigo-50/30 p-4 rounded-xl border border-indigo-100/50"></p>
-                </div>
-            </div>
-            <!-- Modal Footer -->
-            <div class="p-4 bg-gray-50 border-t border-gray-100 text-right">
-                <button onclick="closeModal(null)" class="px-5 py-2 bg-slate-900 text-white font-medium text-sm rounded-lg hover:bg-slate-800 transition">Close Guide</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Project Logic Script -->
+    <!-- Complete Self-Contained Database & Logic -->
     <script>
-        let allProjects = [];
+        const allProjects = [
+          {"id": 1, "title": "Smart Irrigation System", "category": "Electronics Project", "difficulty": "Medium", "components": "Arduino Uno, Soil Moisture Sensor, 5V Relay, Water Pump", "steps": "1. Connect Soil Moisture Sensor VCC to Arduino 5V, GND to GND, and AO to Pin A0.\n2. Wire the 5V Relay module to digital pin 7.\n3. Connect the water pump through the relay contacts to a power source.\n4. Upload code to read sensor data: if below threshold, turn relay ON."},
+          {"id": 2, "title": "DIY Solar Phone Charger", "category": "Science Projects", "difficulty": "Easy", "components": "6V Solar Panel, 5V DC-DC Buck Converter, USB Port, Wires", "steps": "1. Identify positive (+) and negative (-) terminals on the solar panel.\n2. Solder wires from panel terminals to the Input side of the 5V voltage regulator.\n3. Connect a USB female port to the output side of the regulator.\n4. Place under sunlight and plug in your phone charging cable."},
+          {"id": 3, "title": "Home Automation via Bluetooth", "category": "Electronics Project", "difficulty": "Hard", "components": "Arduino, HC-05 Bluetooth Module, 4-Channel Relay, Smartphone App", "steps": "1. Connect HC-05 TX to Arduino RX (Pin 0) and RX to TX (Pin 1) with a voltage divider.\n2. Wire appliances through the 4 channels of the relay board.\n3. Connect relay signal pins to digital pins 2, 3, 4, and 5.\n4. Code Arduino to switch relay on serial character inputs."},
+          {"id": 4, "title": "Automatic Street Light Controller", "category": "Electronics Project", "difficulty": "Medium", "components": "LDR (Light Dependent Resistor), 555 Timer IC, LED, 10k Resistor, 9V Battery", "steps": "1. Connect the LDR and a 10k resistor as a potential divider circuit.\n2. Feed the midpoint voltage to the trigger pin of a 555 Timer.\n3. Connect an LED or a relay to the output pin to activate the light.\n4. Calibrate sensitivity by adjusting the variable resistor layout."},
+          {"id": 5, "title": "Obstacle Avoiding Robot", "category": "Electronics Project", "difficulty": "Hard", "components": "Arduino Uno, L298N Motor Driver, DC Gear Motors, Chassis, Battery Pack", "steps": "1. Mount the DC gear motors and wheels to the structural robot chassis frame.\n2. Connect motor leads directly to the output channels of the L298N driver.\n3. Route control lines from Arduino digital output channels to driver inputs.\n4. Program the logic loops to orchestrate directional movement matrixes."},
+          {"id": 6, "title": "Digital Thermometer using LM35", "category": "Science Projects", "difficulty": "Easy", "components": "Arduino Uno, LM35 Temp Sensor, 16x2 LCD Display Screen, Wires", "steps": "1. Connect LM35 pin 1 to 5V, pin 3 to GND, and pin 2 to Arduino Analog pin A0.\n2. Wire LCD Display pins data lines to Arduino digital outputs 2, 3, 4, and 5.\n3. Write basic formula: Celsius = (AnalogRead * 0.488).\n4. Print output readings directly on the LCD screen module interface."},
+          {"id": 7, "title": "LPG Gas Leakage Detector", "category": "Electronics Project", "difficulty": "Medium", "components": "MQ-2 Gas Sensor Module, Active Buzzer, Arduino Uno, Red LED", "steps": "1. Connect the VCC and GND pins of the sensory module to the main power lines.\n2. Tie the digital output pin directly to an Arduino data input channel.\n3. Attach an active buzzer and warning LED to designated digital outputs.\n4. Set threshold monitoring bounds inside the code script execution loop."},
+          {"id": 8, "title": "RFID Based Attendance System", "category": "Electronics Project", "difficulty": "Hard", "components": "Arduino Uno, RC522 RFID Reader Module, RFID Tags, I2C LCD Display", "steps": "1. Wire RC522 SPI pins (MOSI, MISO, SCK) to Arduino pins 11, 12, and 13.\n2. Connect reader SDA to pin 10 and RST to pin 9.\n3. Scan unique card UID identifier codes into internal loop database metrics.\n4. Trigger custom validation alerts upon detecting authorized card keys."},
+          {"id": 9, "title": "Ultrasonic Distance Meter", "category": "Science Projects", "difficulty": "Easy", "components": "Arduino Uno, HC-SR04 Ultrasonic Sensor, Breadboard, Jumper Wires", "steps": "1. Connect HC-SR04 VCC to 5V, GND to GND, Trig to pin 9, and Echo to pin 10.\n2. Write script to pulse the trigger line high for 10 microseconds.\n3. Measure duration return feedback window length on Echo line input.\n4. Compute conversion matrix: Distance = (Duration * 0.0343) / 2."},
+          {"id": 10, "title": "Voice Controlled House Appliances", "category": "Electronics Project", "difficulty": "Medium", "components": "Arduino Uno, HC-05 Bluetooth, Relay Module, AMR Voice App", "steps": "1. Connect Bluetooth serial communication data pipes to target micro-controller.\n2. Interface smartphone layout terminal using a custom voice-to-text android application.\n3. Map spoken control sequences directly to specific physical high-voltage relays.\n4. Execute commands locally to switch linked lighting circuits on demand safely."},
+          {"id": 11, "title": "Fingerprint Door Lock System", "category": "Electronics Project", "difficulty": "Hard", "components": "Arduino, AS608 Fingerprint Sensor, Solenoid Door Lock, 12V Relay", "steps": "1. Connect AS608 serial transmission lines to designated software serial pins.\n2. Enroll master fingerprint scan profiles into internal flash storage arrays.\n3. Link 12V external primary driver loop through logic output switching relays.\n4. Fire output lines to disengage magnetic solenoid lock plates upon access match."},
+          {"id": 12, "title": "Rain Detector Alarm", "category": "Science Projects", "difficulty": "Easy", "components": "Raindrops Sensor Board, LM393 Comparator, Active Buzzer, 9V Battery", "steps": "1. Connect sensory hardware paths to inputs. Trigger audio output alerts immediately when rainwater hits standard detection tracks."},
+          {"id": 13, "title": "Line Follower Robot", "category": "Electronics Project", "difficulty": "Medium", "components": "Robot Chassis, Dual IR Sensor Modules, L298N Motor Driver, DC Motors", "steps": "1. Mount IR sensors onto structural undercarriage. Track path bounds dynamically to balance motor drive output matrices."},
+          {"id": 14, "title": "Water Level Indicator", "category": "Science Projects", "difficulty": "Easy", "components": "BC547 Transistors, Resistors, Multi-colored LEDs, Overhead Tank Probes", "steps": "1. Build sequential transmissive base wiring pipelines. Leverage water's inherent conductivity profile to complete circuit loops."},
+          {"id": 15, "title": "Password Protected Security System", "category": "Electronics Project", "difficulty": "Medium", "components": "Arduino Uno, 4x4 Matrix Keypad, 16x2 LCD Display, Servo Motor", "steps": "1. Map keypad line vectors to digital processing pins. Actuate standard servo lock arms upon matching code validation keys."},
 
-        async function loadProjects() {
-            try {
-                const response = await fetch('projects.json');
-                allProjects = await response.json();
-                renderCards(allProjects);
-            } catch (error) {
-                console.error("Error connecting to data file:", error);
-                document.getElementById('projectsGrid').innerHTML = `
-                    <p class="text-center text-red-500 font-bold col-span-full">Failed to load projects. Ensure projects.json is uploaded alongside this file.</p>
-                `;
-            }
-        }
-
-        function renderCards(projectsList) {
-            const grid = document.getElementById('projectsGrid');
-            if (projectsList.length === 0) {
-                grid.innerHTML = `<p class="text-center text-gray-500 col-span-full py-10">No matching projects found.</p>`;
-                return;
-            }
-
-            grid.innerHTML = projectsList.map(project => {
-                // Ensure display category strings look uniform on layout grid
-                let displayCat = project.category;
-                if(displayCat !== "Electronics Project" && displayCat !== "Science Projects") {
-                    displayCat = displayCat.includes("Electronics") || displayCat.includes("Embedded") || displayCat.includes("Automation") ? "Electronics Project" : "Science Projects";
-                }
-
-                return `
-                <div onclick="openModal(${project.id})" class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between cursor-pointer hover:border-indigo-300 group">
-                    <div>
-                        <div class="flex justify-between items-start gap-2 mb-3">
-                            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">${displayCat}</span>
-                            <span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full ${
-                                project.difficulty === 'Easy' ? 'bg-green-100 text-green-800' :
-                                project.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
-                            }">${project.difficulty}</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors">${project.title}</h3>
-                        <p class="text-gray-500 text-xs line-clamp-2">${project.components}</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-gray-100 text-left">
-                        <span class="text-xs font-bold text-indigo-600 inline-flex items-center gap-1 group-hover:underline">
-                            View Full Guide &rarr;
-                        </span>
-                    </div>
-                </div>
-            `}).join('');
-        }
-
-        function openModal(id) {
-            const project = allProjects.find(p => p.id === id);
-            if (!project) return;
-
-            let displayCat = project.category;
-            if(displayCat !== "Electronics Project" && displayCat !== "Science Projects") {
-                displayCat = displayCat.includes("Electronics") || displayCat.includes("Embedded") || displayCat.includes("Automation") ? "Electronics Project" : "Science Projects";
-            }
-
-            document.getElementById('modalCategory').innerText = displayCat;
-            document.getElementById('modalTitle').innerText = project.title;
-            document.getElementById('modalComponents').innerText = project.components;
-            document.getElementById('modalSteps').innerText = project.steps;
-
-            const modal = document.getElementById('projectModal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function closeModal(event) {
-            const modal = document.getElementById('projectModal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = ''; 
-        }
-
-        function filterProjects() {
-            const searchQuery = document.getElementById('search').value.toLowerCase();
-            const categoryQuery = document.getElementById('categoryFilter').value;
-
-            const filtered = allProjects.filter(project => {
-                const matchesSearch = project.title.toLowerCase().includes(searchQuery) || 
-                                      project.components.toLowerCase().includes(searchQuery);
-                
-                // Map the dynamic datasets to match the exact select option strings
-                let mappedCategory = project.category;
-                if(mappedCategory !== "Electronics Project" && mappedCategory !== "Science Projects") {
-                    mappedCategory = mappedCategory.includes("Electronics") || mappedCategory.includes("Embedded") || mappedCategory.includes("Automation") ? "Electronics Project" : "Science Projects";
-                }
-
-                const matchesCategory = categoryQuery === 'all' || mappedCategory === categoryQuery;
-                return matchesSearch && matchesCategory;
-            });
-
-            renderCards(filtered);
-        }
-
-        document.getElementById('search').addEventListener('input', filterProjects);
 
